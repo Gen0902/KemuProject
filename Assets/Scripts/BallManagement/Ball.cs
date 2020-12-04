@@ -10,14 +10,20 @@ public class Ball : MonoBehaviour
 
     [HideInInspector] public ETeam teamAllegiance;
 
+    private bool isDestroying = false;
+
     // Start is called before the first frame update
     void Start()
     {
         ChangeAllegiance(ETeam.None);
+        isDestroying = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (isDestroying)
+            return;
+
         GroundTile tile = collision.gameObject.GetComponent<GroundTile>();
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         Ramp ramp = collision.gameObject.GetComponent<Ramp>();
@@ -91,6 +97,7 @@ public class Ball : MonoBehaviour
 
     private void Disintegrate()
     {
+        isDestroying = true;
         Destroy(gameObject);
     }
 }

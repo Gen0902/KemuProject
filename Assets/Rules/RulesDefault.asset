@@ -16,8 +16,8 @@ MonoBehaviour:
   hitsToDestroyTiles: 2
   scoreIfHitPlayer: 1
   scoreIfDestroyTile: 1
-  scoreIfPlayerFalls: 0
-  scoreIfBallFalls: 0
+  scoreIfPlayerFalls: 1
+  scoreIfBallFalls: 1
   rampChangeAlliegance: 1
   scoreMax: 3
   timeMax: 120
