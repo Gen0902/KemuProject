@@ -13,7 +13,6 @@ public class GroundTile : MonoBehaviour
 
     private int hit = 0;
 
-
     public bool HandleHit(ETeam ballTeam)
     {
         if (ballTeam == TeamUtils.GetOppositeTeam(team))
