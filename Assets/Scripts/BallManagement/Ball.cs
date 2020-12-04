@@ -19,35 +19,42 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GroundTile tile = collision.gameObject.GetComponent<GroundTile>();
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+        Ramp ramp = collision.gameObject.GetComponent<Ramp>();
+
         if (tile != null)
         {
-            tile.HandleHit(teamAllegiance);
-            Disintegrate();
-            return;
+            if (tile.HandleHit(teamAllegiance))
+                Disintegrate();
         }
-
-        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-        if (player != null && player.team == TeamUtils.GetOppositeTeam(teamAllegiance))
+        else if (player != null && player.team == TeamUtils.GetOppositeTeam(teamAllegiance))
         {
             if (GameManager.Instance.rules.scoreIfHitPlayer)
+            {
                 GameManager.Instance.IncrementScore(teamAllegiance);
-            Disintegrate();
-            return;
+                Disintegrate();
+            }
+        }
+        else if (ramp != null)
+        {
+            if (GameManager.Instance.rules.rampChangeAlliegance)
+                ChangeAllegiance(ramp.team);
         }
     }
 
     public void ChangeAllegiance(ETeam team)
     {
+        teamAllegiance = team;
         switch (team)
         {
             case ETeam.None:
                 SetEmisionColor(Color.white);
                 break;
             case ETeam.Team1:
-                SetEmisionColor(Color.red);
+                SetEmisionColor(Color.blue);
                 break;
             case ETeam.Team2:
-                SetEmisionColor(Color.blue);
+                SetEmisionColor(Color.red);
                 break;
             default:
                 break;
@@ -84,7 +91,6 @@ public class Ball : MonoBehaviour
 
     private void Disintegrate()
     {
-        Debug.Log("Destroy ball");
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

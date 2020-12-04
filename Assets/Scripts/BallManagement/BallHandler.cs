@@ -7,11 +7,23 @@ public class BallHandler : MonoBehaviour
 {
     public Transform firePoint;
 
-    public float throwForce = 2;
-    //public float controlForce;
-    public float pickUpRadius = 0.8f;
-    private Ball holdingBall;
+    public float pickUpRadius = 0.8f; //Debug
 
+    private Ball holdingBall;
+    private float throwForce = 10;
+    //public float controlForce;
+    private ETeam playerTeam = ETeam.None;
+
+    private void Start()
+    {
+        PlayerController player = GetComponent<PlayerController>();
+        if (player != null)
+            playerTeam = player.team;
+        else
+            Debug.LogError("Can't find attached player");
+
+        throwForce = GameManager.Instance.rules.playerThrowForce;
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,13 +48,17 @@ public class BallHandler : MonoBehaviour
         if (holdingBall != null)
         {
             holdingBall.Launch(firePoint.forward, throwForce);
+            holdingBall.ChangeAllegiance(playerTeam);
             holdingBall = null;
         }
         else
         {
             Ball ball = DetectBall();
             if (ball != null)
+            {
                 ball.Launch(firePoint.forward, throwForce);
+                ball.ChangeAllegiance(playerTeam);
+            }
         }
     }
 
@@ -73,6 +89,7 @@ public class BallHandler : MonoBehaviour
         {
             ball.Stop();
             holdingBall = ball;
+            ball.ChangeAllegiance(playerTeam);
         }
     }
 

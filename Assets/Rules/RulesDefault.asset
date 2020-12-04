@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce8fc942d618e244b249fe761e8e45e, type: 3}
   m_Name: RulesDefault
   m_EditorClassIdentifier: 
-  hitsToDestroyTiles: 0
-  scoreIfHitPlayer: 0
-  scoreIfHitGround: 0
+  playerThrowForce: 10
+  hitsToDestroyTiles: 2
+  scoreIfHitPlayer: 1
+  scoreIfDestroyTile: 1
   scoreIfPlayerFalls: 0
   scoreIfBallFalls: 0
+  rampChangeAlliegance: 1
   scoreMax: 3
   timeMax: 120

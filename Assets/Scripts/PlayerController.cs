@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public ETeam team;
 
     //private
-    private Rigidbody body;
+    private Rigidbody rigidBody;
     private Vector3 inputs = Vector3.zero;
     private bool isGrounded = true;
 
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        body = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         float curSpeedZ = walkingSpeed * inputs.z;
         xyMove = (forward * curSpeedZ) + (right * curSpeedX);
 
+
         //Apply gravity
         //if (!isGrounded)
         //    moveDirection.y -= gravity * Time.deltaTime;
@@ -64,12 +65,17 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (canMove)
-            body.MovePosition(body.position + xyMove * Time.fixedDeltaTime);
+            rigidBody.MovePosition(rigidBody.position + xyMove * Time.fixedDeltaTime);
     }
 
     public void TakeHit()
     {
 
+    }
+
+    public void Stop()
+    {
+        rigidBody.velocity = Vector3.zero;
     }
 
     private void Rotate()

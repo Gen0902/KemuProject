@@ -13,8 +13,8 @@ public class ScoreManager : MonoBehaviour
 
 
     [Header("Score Panel")]
-    [SerializeField] TextMeshProUGUI scoreText1;
-    [SerializeField] TextMeshProUGUI scoreText2;
+    [SerializeField] TextMeshProUGUI[] scoreTexts1;
+    [SerializeField] TextMeshProUGUI[] scoreTexts2;
     [SerializeField] TextMeshProUGUI timerText;
 
     // Start is called before the first frame update
@@ -33,8 +33,11 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateScore(int score1, int score2)
     {
-        scoreText1.text = $"{score1} : {score2}"; ;
-        scoreText2.text = $"{score2} : {score1}"; ;
+        foreach (TextMeshProUGUI textMesh in scoreTexts1)
+            textMesh.text = score1.ToString() ;
+
+        foreach (TextMeshProUGUI textMesh in scoreTexts2)
+            textMesh.text = score2.ToString() ;
     }
 
     public void UpdateTileIcons()
