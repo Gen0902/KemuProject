@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerThrowForce: 10
   hitsToDestroyTiles: 2
-  scoreIfHitPlayer: 1
+  scoreIfHitPlayer: 0
   scoreIfDestroyTile: 1
   scoreIfPlayerFalls: 1
-  scoreIfBallFalls: 1
+  scoreIfBallFalls: 0
   rampChangeAlliegance: 1
   scoreMax: 3
   timeMax: 120
