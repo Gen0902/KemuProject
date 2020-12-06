@@ -27,8 +27,11 @@ public class GameManager : MonoBehaviour
     [Header("Layers")]
     public LayerMask ballLayer;
     public LayerMask groundLayer;
-    //public LayerMask tilesLayer;
-    //public LayerMask wallLayer;
+
+    [Header("Materials")]
+    public Material team1Mat;
+    public Material team2Mat;
+
 
     [Header("Spawn")]
     public Transform player1Spawn;
@@ -51,7 +54,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        for (int i = 0; i < tileSet1.Length; i++)
+            tileSet1[i].ResetTile();
 
+        for (int i = 0; i < tileSet2.Length; i++)
+            tileSet2[i].ResetTile();
     }
 
     // Update is called once per frame

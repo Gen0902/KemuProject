@@ -92,10 +92,13 @@ public class PlayerController : MonoBehaviour
 
 
 
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(groundChecker.position, groundCheckRadius);
+
+        //Vector3 midllePoint = playerCamera;
     }
 
 }

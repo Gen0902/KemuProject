@@ -11,13 +11,7 @@ public class GroundTile : MonoBehaviour
     [Header("Team")]
     public ETeam team;
 
-    private Material baseMaterial;
     private int hit = 0;
-
-    private void Start()
-    {
-        baseMaterial = renderer.material;
-    }
 
     public bool HandleHit(ETeam ballTeam)
     {
@@ -45,13 +39,15 @@ public class GroundTile : MonoBehaviour
             return false;
             //Start glow effect
         }
-
-
     }
 
     public void ResetTile()
     {
-        renderer.material = baseMaterial;
+        if (team == ETeam.Team2)
+            renderer.material = GameManager.Instance.team2Mat;
+        else
+            renderer.material = GameManager.Instance.team1Mat;
+
         hit = 0;
         gameObject.SetActive(true);
     }
